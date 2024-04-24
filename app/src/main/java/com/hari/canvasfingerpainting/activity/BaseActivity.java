@@ -60,13 +60,13 @@ public class BaseActivity extends AppCompatActivity implements MyConstants {
         }
     }
 
-    public Boolean IsInternetConnected(Context context) {
-        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (!(cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnectedOrConnecting())) {
-            return false;
-        } else
-            return true;
-    }
+    //    public Boolean IsInternetConnected(Context context) {
+//        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+//        if (!(cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnectedOrConnecting())) {
+//            return false;
+//        } else
+//            return true;
+//    }
     public void showKeyBoard() {
         try {
             InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -176,7 +176,7 @@ public class BaseActivity extends AppCompatActivity implements MyConstants {
 // Changing action button text color
         View sbView = snackbar.getView();
         sbView.setOnClickListener(v -> snackbar.dismiss());
-        TextView textView = sbView.findViewById(R.id.snackbar_text);
+        TextView textView = sbView.findViewById(androidx.customview.R.id.text2);
         if (isTopView) {
             snackbar.setDuration(BaseTransientBottomBar.LENGTH_LONG);
             sbView.setBackgroundColor(activity.getResources().getColor(android.R.color.holo_green_dark));
@@ -260,7 +260,7 @@ public class BaseActivity extends AppCompatActivity implements MyConstants {
         View sbView = snackbar.getView();
         TextView textView = sbView.findViewById(com.google.android.material.R.id.snackbar_text);
         textView.setTextColor(Color.RED);
-        textView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.notification_template_icon_bg, 0, 0, 0);
+        textView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.opac, 0, 0, 0);
         textView.setCompoundDrawablePadding(getResources().getDimensionPixelOffset(R.dimen.size_margin20));
         snackbar.show();
     }
@@ -279,40 +279,40 @@ public class BaseActivity extends AppCompatActivity implements MyConstants {
         }
     }
 
-    public void showErrorMessageAlert(Context context) {
-        try {
-            if (!IsInternetConnected(context)) {
-                showSnack("No Internet Connection Available!");
-            } else {
-                showSnack("Something went wrong. Please try again\" + \" in some time ");
-            }
-        } catch (Exception ex) {
-        }
-    }
+//    public void showErrorMessageAlert(Context context) {
+//        try {
+//            if (!IsInternetConnected(context)) {
+//                showSnack("No Internet Connection Available!");
+//            } else {
+//                showSnack("Something went wrong. Please try again\" + \" in some time ");
+//            }
+//        } catch (Exception ex) {
+//        }
+//    }
 
-    public void showProgressDialog(Context context) {
-        dialog = new Dialog(context);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        Window window = dialog.getWindow();
-        WindowManager.LayoutParams wlp = window.getAttributes();
-
-        wlp.gravity = Gravity.CENTER;
-        wlp.flags &= ~WindowManager.LayoutParams.FLAG_FULLSCREEN;
-        window.setAttributes(wlp);
-
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.custom_dialog);
-        dialog.setOnKeyListener(new Dialog.OnKeyListener() {
-            @Override
-            public boolean onKey(DialogInterface d, int keyCode, KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_BACK) {
-                    d.dismiss();
-                }
-                return true;
-            }
-        });
-        dialog.setCancelable(false);
-        dialog.show();
-    }
+//    public void showProgressDialog(Context context) {
+//        dialog = new Dialog(context);
+//        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//        Window window = dialog.getWindow();
+//        WindowManager.LayoutParams wlp = window.getAttributes();
+//
+//        wlp.gravity = Gravity.CENTER;
+//        wlp.flags &= ~WindowManager.LayoutParams.FLAG_FULLSCREEN;
+//        window.setAttributes(wlp);
+//
+//        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        dialog.setContentView(R.layout.custom_dialog);
+//        dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+//            @Override
+//            public boolean onKey(DialogInterface d, int keyCode, KeyEvent event) {
+//                if (keyCode == KeyEvent.KEYCODE_BACK) {
+//                    d.dismiss();
+//                }
+//                return true;
+//            }
+//        });
+//        dialog.setCancelable(false);
+//        dialog.show();
+//    }
 
 }

@@ -43,73 +43,82 @@ import com.hari.canvasfingerpainting.activity.ColorPickerrActivity;
 import androidx.core.content.ContextCompat;
 
 public class MainActivity extends BaseActivity implements ColorPicker.OnColorChangedListener, OnClickListener {
-	//custom drawing view
-	private DrawingView drawView;private String colorr="#FFFFFF",color="#000000";
-	private Button btn_pick_pallete,btn3;View colors_palette, pallete_backg;int count=0;boolean counter=false;
-	private ImageButton currPaint, btn2_palette, newBtn, saveBtn, opacityBtn, drawBtn, eraseBtn, galleryBtn, cameraBtn;int colorrr;protected static final int CAMERA_PIC_REQUEST = 0;Bitmap bitmap;	private static int RESULT_LOAD_IMAGE = 1;
-	private float smallpenBrush, smallestBrush, smallerBrush, smallBrush, mediumBrush, largeBrush;
+    //custom drawing view
+    private DrawingView drawView;
+    private String colorr = "#FFFFFF", color = "#000000";
+    private Button btn_pick_pallete, btn3;
+    View colors_palette, pallete_backg;
+    int count = 0;
+    boolean counter = false;
+    private ImageButton currPaint, btn2_palette, newBtn, saveBtn, opacityBtn, drawBtn, eraseBtn, galleryBtn, cameraBtn;
+    int colorrr;
+    protected static final int CAMERA_PIC_REQUEST = 0;
+    Bitmap bitmap;
+    private static int RESULT_LOAD_IMAGE = 1;
+    private float smallpenBrush, smallestBrush, smallerBrush, smallBrush, mediumBrush, largeBrush;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
-		overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
-		
-		this.activity = this;  
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
+        overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
 
-		//get drawing view
-		drawView = (DrawingView)findViewById(R.id.drawing);
+        this.activity = this;
 
-		colorrr= Color.parseColor(colorr);
-		drawView.setColor(color);
-		drawView .setBackgroundColor(colorrr);  
+        //get drawing view
+        drawView = (DrawingView) findViewById(R.id.drawing);
 
-		//hari_get the palette and first color button
-		LinearLayout paintLayout = (LinearLayout)findViewById(R.id.paint_colors2);
-		currPaint = (ImageButton)paintLayout.getChildAt(3);
-		currPaint.setImageDrawable(getResources().getDrawable(R.drawable.paint_pressed));
+        colorrr = Color.parseColor(colorr);
+        drawView.setColor(color);
+        drawView.setBackgroundColor(colorrr);
 
-		smallpenBrush = getResources().getInteger(R.integer.vvvsmall_size);
-		
-		smallestBrush = getResources().getInteger(R.integer.vvsmall_size);
-		smallerBrush = getResources().getInteger(R.integer.vsmall_size);
-		
-		smallBrush = getResources().getInteger(R.integer.small_size);
-		
-		mediumBrush = getResources().getInteger(R.integer.medium_size);
-		largeBrush = getResources().getInteger(R.integer.large_size);
+        //hari_get the palette and first color button
+        LinearLayout paintLayout = (LinearLayout) findViewById(R.id.paint_colors2);
+        currPaint = (ImageButton) paintLayout.getChildAt(3);
+        currPaint.setImageDrawable(getResources().getDrawable(R.drawable.paint_pressed));
+
+        smallpenBrush = getResources().getInteger(R.integer.vvvsmall_size);
+
+        smallestBrush = getResources().getInteger(R.integer.vvsmall_size);
+        smallerBrush = getResources().getInteger(R.integer.vsmall_size);
+
+        smallBrush = getResources().getInteger(R.integer.small_size);
+
+        mediumBrush = getResources().getInteger(R.integer.medium_size);
+        largeBrush = getResources().getInteger(R.integer.large_size);
 ////////hari_ex////////////////////////////
-		colors_palette=(View)findViewById(R.id.palette_colors);
-		pallete_backg=(View)findViewById(R.id.palette_backg);
-		
-		btn_pick_pallete=(Button)findViewById(R.id.button1_bg);
-		
-		btn2_palette=(ImageButton)findViewById(R.id.button2_palette);
-//			btn2.setOnClickListener(this);
-		  btn3=(Button)findViewById(R.id.button3);
+        colors_palette = (View) findViewById(R.id.palette_colors);
+        pallete_backg = (View) findViewById(R.id.palette_backg);
 
-		  btn_pick_pallete.setOnClickListener(new OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
-					// TODO Auto-generated method stub
+        btn_pick_pallete = (Button) findViewById(R.id.button1_bg);
+
+        btn2_palette = (ImageButton) findViewById(R.id.button2_palette);
+//			btn2.setOnClickListener(this);
+        btn3 = (Button) findViewById(R.id.button3);
+
+        btn_pick_pallete.setOnClickListener(new OnClickListener() {
+
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
 //			    	 Intent intent=new Intent(getApplicationContext(), ColorPickerrActivity.class);
 ////			    		i.putExtra("hari_ans", correct);
 //			    	 startActivity(intent);
-					
+
 //					Button imgView = (Button)v;
 //					String color = v.getTag().toString();
 //					color colorrr;
-					colorrr= Color.parseColor(colorr);//by hari
+                colorrr = Color.parseColor(colorr);//by hari
 //					drawView.setColor(color);
-					drawView .setBackgroundColor(colorrr);  
-					
-				}
-			});
-		  
-		  
+                drawView.setBackgroundColor(colorrr);
+
+            }
+        });
+
+
 //		  btn2_palette.setOnClickListener(new OnClickListener() {
 //			  
 //				@Override
@@ -135,87 +144,88 @@ public class MainActivity extends BaseActivity implements ColorPicker.OnColorCha
 //				}
 //			});
 
-		  btn3.setOnClickListener(new OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
-			    	 Intent intent=new Intent(getApplicationContext(), ColorPickerrActivity.class);
+        btn3.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ColorPickerrActivity.class);
 //			    		i.putExtra("hari_ans", correct);
-			    	 startActivity(intent);
-					
-				}
-			});//////////////////////////////////////////////////hariendth_functjion///////////////
-		drawBtn = (ImageButton)findViewById(R.id.draw_btn);
-		drawBtn.setOnClickListener(this);
-		//set initial size
-		drawView.setBrushSize(smallBrush);
-		eraseBtn = (ImageButton)findViewById(R.id.erase_btn);
-		eraseBtn.setOnClickListener(this);
+                startActivity(intent);
 
-		newBtn = (ImageButton)findViewById(R.id.new_btn);
-		newBtn.setOnClickListener(this);
+            }
+        });//////////////////////////////////////////////////hariendth_functjion///////////////
+        drawBtn = (ImageButton) findViewById(R.id.draw_btn);
+        drawBtn.setOnClickListener(this);
+        //set initial size
+        drawView.setBrushSize(smallBrush);
+        eraseBtn = (ImageButton) findViewById(R.id.erase_btn);
+        eraseBtn.setOnClickListener(this);
 
-		saveBtn = (ImageButton)findViewById(R.id.save_btn);
-		saveBtn.setOnClickListener(this);
+        newBtn = (ImageButton) findViewById(R.id.new_btn);
+        newBtn.setOnClickListener(this);
 
-		opacityBtn = (ImageButton)findViewById(R.id.opacity_btn);
-		opacityBtn.setOnClickListener(this);
+        saveBtn = (ImageButton) findViewById(R.id.save_btn);
+        saveBtn.setOnClickListener(this);
 
-	    galleryBtn = (ImageButton)findViewById(R.id.gallery_btn);
-	    galleryBtn.setOnClickListener(this);
+        opacityBtn = (ImageButton) findViewById(R.id.opacity_btn);
+        opacityBtn.setOnClickListener(this);
 
-	    cameraBtn = (ImageButton)findViewById(R.id.camera_btn);
-	    cameraBtn.setOnClickListener(this);
+        galleryBtn = (ImageButton) findViewById(R.id.gallery_btn);
+        galleryBtn.setOnClickListener(this);
 
-	}//endonecrea
+        cameraBtn = (ImageButton) findViewById(R.id.camera_btn);
+        cameraBtn.setOnClickListener(this);
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
+    }//endonecrea
 
-//	user clicked paint
-	public void paintClicked(View view){
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
 
-		//set erase false
-		drawView.setErase(false);
-		drawView.setPaintAlpha(100);
-		drawView.setBrushSize(drawView.getLastBrushSize());
+    //	user clicked paint
+    public void paintClicked(View view) {
 
-		if(view!=currPaint){
-			ImageButton imgView = (ImageButton)view;
-			color = view.getTag().toString();
-			drawView.setColor(color);
-			
-			imgView.setImageDrawable(getResources().getDrawable(R.drawable.paint_pressed));
-			currPaint.setImageDrawable(getResources().getDrawable(R.drawable.paint));
-			currPaint=(ImageButton)view;
-		}
-	}
-//	//user clicked background
-	public void backgClicked(View view){
-		//use chosen color
+        //set erase false
+        drawView.setErase(false);
+        drawView.setPaintAlpha(100);
+        drawView.setBrushSize(drawView.getLastBrushSize());
+
+        if (view != currPaint) {
+            ImageButton imgView = (ImageButton) view;
+            color = view.getTag().toString();
+            drawView.setColor(color);
+
+            imgView.setImageDrawable(getResources().getDrawable(R.drawable.paint_pressed));
+            currPaint.setImageDrawable(getResources().getDrawable(R.drawable.paint));
+            currPaint = (ImageButton) view;
+        }
+    }
+
+    //	//user clicked background
+    public void backgClicked(View view) {
+        //use chosen color
 
 //		if(view!=currPaint){
-			ImageButton imgView = (ImageButton)view;
-			colorr = view.getTag().toString();
-			System.out.println("color backgClicked"+colorr);
+        ImageButton imgView = (ImageButton) view;
+        colorr = view.getTag().toString();
+        System.out.println("color backgClicked" + colorr);
 //			 drawView .setBackgroundColor(color);  
 //			color colorrr;
-			colorrr= Color.parseColor(colorr);
+        colorrr = Color.parseColor(colorr);
 //			drawView.setColor(color);
-			drawView .setBackgroundColor(colorrr);  
-			//update ui
-			imgView.setImageDrawable(getResources().getDrawable(R.drawable.paint_pressed));
-			currPaint.setImageDrawable(getResources().getDrawable(R.drawable.paint));
-			currPaint=(ImageButton)view;
+        drawView.setBackgroundColor(colorrr);
+        //update ui
+        imgView.setImageDrawable(getResources().getDrawable(R.drawable.paint_pressed));
+        currPaint.setImageDrawable(getResources().getDrawable(R.drawable.paint));
+        currPaint = (ImageButton) view;
 //		}
-	}
+    }
 
-	@Override
-	public void onClick(View view){
+    @Override
+    public void onClick(View view) {
 
 //		if(view.getId()==R.id.draw_btn){
 //			//draw button clicked
@@ -286,50 +296,52 @@ public class MainActivity extends BaseActivity implements ColorPicker.OnColorCha
 //			//show and wait for user interaction
 //			brushDialog.show();
 //		}
-		if(view.getId()==R.id.draw_btn){
+        if (view.getId() == R.id.draw_btn) {
 /////////////////////////////////////////
-			final Dialog seekDialog = new Dialog(this);
-			seekDialog.setTitle("Set brush size:");
-			seekDialog.setContentView(R.layout.brush_choose);
-			final TextView seekTxt = (TextView)seekDialog.findViewById(R.id.brsh_txt);
-			final SeekBar seekBrsh = (SeekBar)seekDialog.findViewById(R.id.brsh_seek);
+            final Dialog seekDialog = new Dialog(this);
+            seekDialog.setTitle("Set brush size:");
+            seekDialog.setContentView(R.layout.brush_choose);
+            final TextView seekTxt = (TextView) seekDialog.findViewById(R.id.brsh_txt);
+            final SeekBar seekBrsh = (SeekBar) seekDialog.findViewById(R.id.brsh_seek);
 
-			seekBrsh.setMax(50);
-			int currLevel = getResources().getInteger(R.integer.small_size);
-			seekTxt.setText(currLevel+"%");
-			seekBrsh.setProgress(currLevel);
-			seekBrsh.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+            seekBrsh.setMax(50);
+            int currLevel = getResources().getInteger(R.integer.small_size);
+            seekTxt.setText(currLevel + "%");
+            seekBrsh.setProgress(currLevel);
+            seekBrsh.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 
-				@Override
-				public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-					int prog=progress*2;
-					seekTxt.setText(Integer.toString(prog)+"%");
-				}
+                @Override
+                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                    int prog = progress * 2;
+                    seekTxt.setText(Integer.toString(prog) + "%");
+                }
 
-				@Override
-				public void onStartTrackingTouch(SeekBar seekBar) {}
+                @Override
+                public void onStartTrackingTouch(SeekBar seekBar) {
+                }
 
-				@Override
-				public void onStopTrackingTouch(SeekBar seekBar) {}
+                @Override
+                public void onStopTrackingTouch(SeekBar seekBar) {
+                }
 
-			});
-			Button brushSizeBtn = (Button)seekDialog.findViewById(R.id.brsh_ok);
-			brushSizeBtn.setOnClickListener(new OnClickListener(){
-				@Override
-				public void onClick(View v) {
-					
-					drawView.setErase(false);
-					drawView.setBrushSize(seekBrsh.getProgress());
-					drawView.setLastBrushSize(seekBrsh.getProgress());
+            });
+            Button brushSizeBtn = (Button) seekDialog.findViewById(R.id.brsh_ok);
+            brushSizeBtn.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    drawView.setErase(false);
+                    drawView.setBrushSize(seekBrsh.getProgress());
+                    drawView.setLastBrushSize(seekBrsh.getProgress());
 
 //					drawView.setPaintAlpha(seekBrsh.getProgress());
-					drawView.setColor(color);//harijugd_temp
-					seekDialog.dismiss();
-				}
-			});
-			seekDialog.show();
-			//////////////////////hariend fro seek
-			
+                    drawView.setColor(color);//harijugd_temp
+                    seekDialog.dismiss();
+                }
+            });
+            seekDialog.show();
+            //////////////////////hariend fro seek
+
 //			final Dialog brushDialog = new Dialog(this);
 //			brushDialog.setTitle("Set brush size:");
 //			brushDialog.setContentView(R.layout.brush_choose);
@@ -346,118 +358,114 @@ public class MainActivity extends BaseActivity implements ColorPicker.OnColorCha
 //
 //			});
 //			brushDialog.show();
-		}
-		else if(view.getId()==R.id.new_btn){
-			//new button
-			AlertDialog.Builder newDialog = new AlertDialog.Builder(this);
-			newDialog.setTitle("New drawing");
-			newDialog.setMessage("Start new drawing (you will lose the current drawing)?");
-			newDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
-				public void onClick(DialogInterface dialog, int which){
-					drawView.startNew();
+        } else if (view.getId() == R.id.new_btn) {
+            //new button
+            AlertDialog.Builder newDialog = new AlertDialog.Builder(this);
+            newDialog.setTitle("New drawing");
+            newDialog.setMessage("Start new drawing (you will lose the current drawing)?");
+            newDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    drawView.startNew();
 //					drawView.setBackground(null);
 //					colorr = view.getTag().toString();
-					colorr="#FFFFFF";
+                    colorr = "#FFFFFF";
 //					System.out.println("color backgClicked"+colorr);
 //					 drawView .setBackgroundColor(color);  
 //					color colorrr;
-					colorrr= Color.parseColor(colorr);
+                    colorrr = Color.parseColor(colorr);
 //					drawView.setColor(color);
-					drawView .setBackgroundColor(colorrr);  
+                    drawView.setBackgroundColor(colorrr);
 
 //					drawView.setBackgroundColor(color.white);
 //			        colorr="#ffffffff";//doing by anurg.for erasing the color with backg_color....(hari)...
 //					colorrr= Color.parseColor(colorr);
 
-					dialog.dismiss();
-				}
-			});
-			newDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener(){
-				public void onClick(DialogInterface dialog, int which){
-					dialog.cancel();
-				}
-			});
-			newDialog.show();
-		}
-		else if(view.getId()==R.id.save_btn){
-			if(!getWritePermission()){
-				showToast("Please allow storage permission to save in gallery!");
-				return;
-			}
+                    dialog.dismiss();
+                }
+            });
+            newDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+            newDialog.show();
+        } else if (view.getId() == R.id.save_btn) {
+            if (!getWritePermission()) {
+                showToast("Please allow storage permission to save in gallery!");
+                return;
+            }
 
-			AlertDialog.Builder saveDialog = new AlertDialog.Builder(this);
-			saveDialog.setTitle("Save drawing");
-			saveDialog.setMessage("Save drawing to device Gallery?");
-			saveDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
-				public void onClick(DialogInterface dialog, int which){
-					drawView.setDrawingCacheEnabled(true);
-					//attempt to save
-					String imgSaved = Images.Media.insertImage(
-							getContentResolver(), drawView.getDrawingCache(),
-							UUID.randomUUID().toString()+".png", "drawing");
+            AlertDialog.Builder saveDialog = new AlertDialog.Builder(this);
+            saveDialog.setTitle("Save drawing");
+            saveDialog.setMessage("Save drawing to device Gallery?");
+            saveDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    drawView.setDrawingCacheEnabled(true);
+                    //attempt to save
+                    String imgSaved = Images.Media.insertImage(
+                            getContentResolver(), drawView.getDrawingCache(),
+                            UUID.randomUUID().toString() + ".png", "drawing");
 
-					if(imgSaved!=null){
-						Toast savedToast = Toast.makeText(getApplicationContext(), 
-								"Drawing image saved to Gallery!", Toast.LENGTH_SHORT);
-						savedToast.show();
-					}
-					else{
-						Toast unsavedToast = Toast.makeText(getApplicationContext(), 
-								"Error in saving image to Gallery.", Toast.LENGTH_SHORT);
-						unsavedToast.show();
-					}
-					drawView.destroyDrawingCache();
-				}
-			});
-			saveDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener(){
-				public void onClick(DialogInterface dialog, int which){
-					dialog.cancel();
-				}
-			});
-			saveDialog.show();
-		}
-		else if(view.getId()==R.id.opacity_btn){
-			final Dialog seekDialog = new Dialog(this);
-			seekDialog.setTitle("Opacity level:");
-			seekDialog.setContentView(R.layout.opac_chooser);
-			final TextView seekTxt = (TextView)seekDialog.findViewById(R.id.opq_txt);
-			final SeekBar seekOpq = (SeekBar)seekDialog.findViewById(R.id.opacity_seek);
+                    if (imgSaved != null) {
+                        Toast savedToast = Toast.makeText(getApplicationContext(),
+                                "Drawing image saved to Gallery!", Toast.LENGTH_SHORT);
+                        savedToast.show();
+                    } else {
+                        Toast unsavedToast = Toast.makeText(getApplicationContext(),
+                                "Error in saving image to Gallery.", Toast.LENGTH_SHORT);
+                        unsavedToast.show();
+                    }
+                    drawView.destroyDrawingCache();
+                }
+            });
+            saveDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+            saveDialog.show();
+        } else if (view.getId() == R.id.opacity_btn) {
+            final Dialog seekDialog = new Dialog(this);
+            seekDialog.setTitle("Opacity level:");
+            seekDialog.setContentView(R.layout.opac_chooser);
+            final TextView seekTxt = (TextView) seekDialog.findViewById(R.id.opq_txt);
+            final SeekBar seekOpq = (SeekBar) seekDialog.findViewById(R.id.opacity_seek);
 
-			seekOpq.setMax(100);
-			int currLevel = drawView.getPaintAlpha();
-			seekTxt.setText(currLevel+"%");
-			seekOpq.setProgress(currLevel);
-			seekOpq.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+            seekOpq.setMax(100);
+            int currLevel = drawView.getPaintAlpha();
+            seekTxt.setText(currLevel + "%");
+            seekOpq.setProgress(currLevel);
+            seekOpq.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 
-				@Override
-				public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-					seekTxt.setText(Integer.toString(progress)+"%");
-				}
+                @Override
+                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                    seekTxt.setText(Integer.toString(progress) + "%");
+                }
 
-				@Override
-				public void onStartTrackingTouch(SeekBar seekBar) {}
+                @Override
+                public void onStartTrackingTouch(SeekBar seekBar) {
+                }
 
-				@Override
-				public void onStopTrackingTouch(SeekBar seekBar) {}
+                @Override
+                public void onStopTrackingTouch(SeekBar seekBar) {
+                }
 
-			});
-			Button opqBtn = (Button)seekDialog.findViewById(R.id.opq_ok);
-			opqBtn.setOnClickListener(new OnClickListener(){
-				@Override
-				public void onClick(View v) {
-					drawView.setPaintAlpha(seekOpq.getProgress());
-					seekDialog.dismiss();
-				}
-			});
-			seekDialog.show();
-		}
-
-		else if(view.getId()==R.id.erase_btn){
-			//switch to erase - choose size
+            });
+            Button opqBtn = (Button) seekDialog.findViewById(R.id.opq_ok);
+            opqBtn.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    drawView.setPaintAlpha(seekOpq.getProgress());
+                    seekDialog.dismiss();
+                }
+            });
+            seekDialog.show();
+        } else if (view.getId() == R.id.erase_btn) {
+            //switch to erase - choose size
 //			final Dialog brushDialog = new Dialog(this);
 //			brushDialog.setTitle("Eraser size:");
 //			brushDialog.setContentView(R.layout.brush_chooser);
-			//size buttons
+            //size buttons
 //			ImageButton smallBtn = (ImageButton)brushDialog.findViewById(R.id.small_brush);
 //			smallBtn.setOnClickListener(new OnClickListener(){
 //				@Override
@@ -473,9 +481,9 @@ public class MainActivity extends BaseActivity implements ColorPicker.OnColorCha
 //				public void onClick(View v) {
 
 //			drawView.clearPoints();
-			        drawView.setColor(colorr);//doing by anu.for erasing the color with backg_color....(hari)...
-					drawView.setErase(true);
-					drawView.setBrushSize(mediumBrush);
+            drawView.setColor(colorr);//doing by anu.for erasing the color with backg_color....(hari)...
+            drawView.setErase(true);
+            drawView.setBrushSize(mediumBrush);
 //					brushDialog.dismiss();
 //				}
 //			});
@@ -489,13 +497,13 @@ public class MainActivity extends BaseActivity implements ColorPicker.OnColorCha
 //				}
 //			});
 //			brushDialog.show();
-		}
+        }
 //		else if(view.getId()==R.id.button2){
-			//new button
+        //new button
 //			final Dialog colorDialog = new Dialog(this);
 //			colorDialog.setTitle("Select a color:");
 //			colorDialog.setContentView(R.layout.color_chooser);
-			//listen for clicks on size buttons
+        //listen for clicks on size buttons
 //			ImageButton smallBtn = (ImageButton)brushDialog.findViewById(R.id.small_brush);
 //			smallBtn.setOnClickListener(new OnClickListener(){
 //				@Override
@@ -526,40 +534,40 @@ public class MainActivity extends BaseActivity implements ColorPicker.OnColorCha
 //					brushDialog.dismiss();
 //				}
 //			});
-			//show and wait for user interaction
+        //show and wait for user interaction
 //			colorDialog.show();
 //		}
 
-	    else if(view.getId()==R.id.gallery_btn){
-	    	if(!getWritePermission()){
-	    		showToast("Please allow storage permission to save in gallery!");
-	    		return;
-			}
+        else if (view.getId() == R.id.gallery_btn) {
+            if (!getWritePermission()) {
+                showToast("Please allow storage permission to save in gallery!");
+
+                return;
+            }
 
 //	    		    	setDrawingThemefrmGallery();
 ///////////////////////////////////////////////////////////////////////
             AlertDialog.Builder newDialog = new AlertDialog.Builder(this);
             newDialog.setTitle("Open gallery");
             newDialog.setMessage("Set background image (you will not lose the current drawing)?");
-            newDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
-	            public void onClick(DialogInterface dialog, int which){
-	            	setDrawingThemefrmGallery();
-	            	}
-    	        });
-    	        newDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener(){
-    	            public void onClick(DialogInterface dialog, int which){
-    	                dialog.cancel();
-    	            }
-    	        });
-    	        newDialog.show();
-    	
-    //////////////////////////////////////////////////////////////////////////	    	
-	    }
-	    else if(view.getId()==R.id.camera_btn){
+            newDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    setDrawingThemefrmGallery();
+                }
+            });
+            newDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+            newDialog.show();
 
-	    	System.out.println("-----------sharing---------");
-	    	
-	    	////////////////////////sharing
+            //////////////////////////////////////////////////////////////////////////
+        } else if (view.getId() == R.id.camera_btn) {
+
+            System.out.println("-----------sharing---------");
+
+            ////////////////////////sharing
 ////////////////////////////////////////////hari_experiment///////////////////////
 //	        FileInputStream ifs;
 //            try {
@@ -577,24 +585,24 @@ public class MainActivity extends BaseActivity implements ColorPicker.OnColorCha
 //                    BitmapFactory.decodeStream(ifs),
 //                    "Message image1", "Message image");
 
-                    // alternative: inserts mBitmap into image gallery
+            // alternative: inserts mBitmap into image gallery
 /*              String url = Images.Media.insertImage(getContentResolver(),
                 mBitmap, "Message image1", "Message image");
 */
-                    // creates the Intent to open the messaging app
-                    // with the image at url attached
-Intent sendIntent = new Intent(Intent.ACTION_SEND); 
-sendIntent.putExtra("sms_body", "Message created using FingerText"); 
+            // creates the Intent to open the messaging app
+            // with the image at url attached
+            Intent sendIntent = new Intent(Intent.ACTION_SEND);
+            sendIntent.putExtra("sms_body", "Message created using FingerText");
 //sendIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(url));
-sendIntent.putExtra(Intent.EXTRA_STREAM, "fffffffffffff");
-sendIntent.setType("image/png");
-startActivity(sendIntent);
-    /* TODO delete the image from the content provider
-     * following line deletes the image, but too soon!
-     */
+            sendIntent.putExtra(Intent.EXTRA_STREAM, "fffffffffffff");
+            sendIntent.setType("image/png");
+            startActivity(sendIntent);
+            /* TODO delete the image from the content provider
+             * following line deletes the image, but too soon!
+             */
 //getContentResolver().delete(Uri.parse(url), null, null);
 
-	    	//////////////////////////////old sharing_cocde///////////
+            //////////////////////////////old sharing_cocde///////////
 //			String mailBody = drawView.toString();
 //	    	Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
 //					sharingIntent.setType("image");
@@ -605,7 +613,7 @@ startActivity(sendIntent);
 //					startActivity(Intent.createChooser(sharingIntent,"Share using"));
 ////////////////////////////////////////////////////////					
 
-	    	//new button
+            //new button
 //	        AlertDialog.Builder newDialog = new AlertDialog.Builder(this);
 //	        newDialog.setTitle("New drawing");
 //	        newDialog.setMessage("Start new drawing (you will lose the current drawing)?");
@@ -624,57 +632,58 @@ startActivity(sendIntent);
 //	            }
 //	        });
 //	        newDialog.show();
-	}
+        }
 
-}
-	public Boolean getWritePermission() {
-		if (HasPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE))
-			return true;
-		else
-			requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 101);
-		return false;
-	}
+    }
 
-	public static Boolean HasPermission(Context context, String permission) {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-			int permissionCheck = ContextCompat.checkSelfPermission(context,
-					permission);
-			if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
-				return true;
-			}
-		} else
-			return true;
-		return false;
-	}
-//////////statring other functions////////////////////////////////////////
-    public void  setDrawingThemefrmGallery()
-    {
+    public Boolean getWritePermission() {
+        if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.TIRAMISU || HasPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE))
+            return true;
+        else
+            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 101);
+        return false;
+    }
+
+    public static Boolean HasPermission(Context context, String permission) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            int permissionCheck = ContextCompat.checkSelfPermission(context,
+                    permission);
+            if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
+                return true;
+            }
+        } else
+            return true;
+        return false;
+    }
+
+    //////////statring other functions////////////////////////////////////////
+    public void setDrawingThemefrmGallery() {
         // To open up a gallery browser
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"),1);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1);
         // To handle when an image is selected from the browser, add the following to your Activity
     }
 
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-    if (resultCode == RESULT_OK) {
-    if (requestCode == 1) {
-    Uri currImageURI = data.getData();
-    String s= getRealPathFromURI(currImageURI);
-    File file = new File(s);
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == 1) {
+                Uri currImageURI = data.getData();
+                String s = getRealPathFromURI(currImageURI);
+                File file = new File(s);
 
-    if (file.exists()) {
-    Drawable d = Drawable.createFromPath(file.getAbsolutePath());
+                if (file.exists()) {
+                    Drawable d = Drawable.createFromPath(file.getAbsolutePath());
 //    drawView.setBackground(d);
-    }
-    else
-    {
-           // file does not exist
-    }
+                } else {
+                    // file does not exist
+                }
 
-    }
-    //////////////////cam
+            }
+            //////////////////cam
 //    InputStream stream = null;
 //    if (requestCode == 101&& resultCode == Activity.RESULT_OK)
 //    {
@@ -708,9 +717,10 @@ startActivity(sendIntent);
 //        }
 //    }
 
-    //////////////////endcam
+            //////////////////endcam
+        }
     }
-    }
+
     /**
      * @param contentURI
      * @return
@@ -719,143 +729,140 @@ startActivity(sendIntent);
         Cursor cursor = getContentResolver().query(contentURI, null, null, null, null);
         if (cursor == null) { // Source is Dropbox or other similar local file path
             return contentURI.getPath();
-        } else { 
-            cursor.moveToFirst(); 
+        } else {
+            cursor.moveToFirst();
             int idx = cursor.getColumnIndex(Images.ImageColumns.DATA);
-            return cursor.getString(idx); 
+            return cursor.getString(idx);
         }
-    }	
+    }
 //////////////////////////////////////////////////////////////////////////////////////////
 
-///////////////////////////////////////////enduserfunction//////////////////////
-	@Override  
-	 public void colorChanged(String str,int color) {    
+    ///////////////////////////////////////////enduserfunction//////////////////////
+    @Override
+    public void colorChanged(String str, int color) {
 //		  MainActivity.this.findViewById(android.R.id.content)  
 //		  .setBackgroundColor(color);  
 
 //		 MainActivity.this.findViewById(android.R.id.drawView)  
-		 drawView .setBackgroundColor(color);  
+        drawView.setBackgroundColor(color);
 
-	 }  
-	  
-	 Activity activity;  
-	  
+    }
+
+    Activity activity;
+
 //	 public void getColor(View v) {  
 //	  new ColorPicker(activity, this, "", Color.BLACK, Color.WHITE).show();   
 //	 }
-	 
-	 @Override
-	 public void onBackPressed() {
-			showAlert("Dear Users, If you like our app please give us Rating of 5 stars.");
-//			int backButtonCount = 0;
-//			if(backButtonCount >= 1)
-//		    {
-//		        Intent intent = new Intent(Intent.ACTION_MAIN);
-//		        intent.addCategory(Intent.CATEGORY_HOME);
-//		        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//		        startActivity(intent);
-//			     super.onBackPressed();
-//			     overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
-//		    }
-//		    else
-//		    {
-//		        Toast.makeText(this, "Press again to exit.", Toast.LENGTH_SHORT).show();
-//		        backButtonCount++;
-//		    }
 
-	 }
-		public void showAlert(String msg){
-	    	AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-	        builder1.setTitle("Canvas Finger Painting");
-	    	builder1.setMessage(msg);
-	        builder1.setCancelable(true);
-	        builder1.setPositiveButton("Yes",
-	                new DialogInterface.OnClickListener() {
-	            public void onClick(DialogInterface dialog, int id) {
-					String getURL="https://play.google.com/store/apps/details?id=com.hari.canvasfingerpainting";
-//	        		Intent intent=new Intent(getApplicationContext(), getURL);
-//	    			startActivity(intent);  
+    int backButtonCount = 0;
 
-	        		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getURL));
-	        		startActivity(browserIntent);
-//	        		System.out.println("----------------exti---------------");//UC wb
-//	        		Context context=view.getContext();
-//	        		Intent thingyToInstall=new Intent(Intent.ACTION_VIEW);
-//	        		thingyToInstall.setDataAndType(Uri.parse(getURL), null);
-//	        		context.startActivity(thingyToInstall);
-	            }
-	        });
-	        builder1.setNegativeButton("No",
-	                new DialogInterface.OnClickListener() {
-	            public void onClick(DialogInterface dialog, int id) {
-//	                dialog.cancel();
-	                dialog.cancel();
-	                System.runFinalizersOnExit(true);
-	                System.exit(0);
-	            	
-	            }
-	        });
+    @Override
+    public void onBackPressed() {
+//			showAlert("Dear Users, If you like our app please give us Rating of 5 stars.");
+        if (backButtonCount >= 1) {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            super.onBackPressed();
+            overridePendingTransition(R.anim.trans_right_in, R.anim.trans_right_out);
+        } else {
+            backButtonCount++;
+            Toast.makeText(this, "Press again to exit.", Toast.LENGTH_SHORT).show();
+        }
+    }
 
-	        AlertDialog alert11 = builder1.create();
-	        alert11.show();
-	    }
-	
+//    public void showAlert(String msg) {
+//        AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+//        builder1.setTitle("Canvas Finger Painting");
+//        builder1.setMessage(msg);
+//        builder1.setCancelable(true);
+//        builder1.setPositiveButton("Yes",
+//                new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int id) {
+//                        String getURL = "https://play.google.com/store/apps/details?id=com.hari.canvasfingerpainting";
+////	        		Intent intent=new Intent(getApplicationContext(), getURL);
+////	    			startActivity(intent);
+//
+//                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getURL));
+//                        startActivity(browserIntent);
+////	        		System.out.println("----------------exti---------------");//UC wb
+////	        		Context context=view.getContext();
+////	        		Intent thingyToInstall=new Intent(Intent.ACTION_VIEW);
+////	        		thingyToInstall.setDataAndType(Uri.parse(getURL), null);
+////	        		context.startActivity(thingyToInstall);
+//                    }
+//                });
+//        builder1.setNegativeButton("No",
+//                new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int id) {
+////	                dialog.cancel();
+//                        dialog.cancel();
+//                        System.runFinalizersOnExit(true);
+//                        System.exit(0);
+//
+//                    }
+//                });
+//
+//        AlertDialog alert11 = builder1.create();
+//        alert11.show();
+//    }
+
 /////////////////////////////end_exit=onBackpressed
 
-/////////////////////////////////////////////////////	 colors_palette
-	    public void BgUpDown(final View view) {
-	        if (!isPanelShown()) {
-	            // Show the panel
-	            Animation bottomUp = AnimationUtils.loadAnimation(this,
-	                    R.anim.bottom_up);
+    /////////////////////////////////////////////////////	 colors_palette
+    public void BgUpDown(final View view) {
+        if (!isPanelShown()) {
+            // Show the panel
+            Animation bottomUp = AnimationUtils.loadAnimation(this,
+                    R.anim.bottom_up);
 
-	            pallete_backg.startAnimation(bottomUp);
-	            pallete_backg.setVisibility(View.VISIBLE);
-	            colors_palette.setVisibility(View.GONE);
-	        }
-	        else {
-	            // Hide the Panel
-	            Animation bottomDown = AnimationUtils.loadAnimation(this,
-	                    R.anim.bottom_down);
+            pallete_backg.startAnimation(bottomUp);
+            pallete_backg.setVisibility(View.VISIBLE);
+            colors_palette.setVisibility(View.GONE);
+        } else {
+            // Hide the Panel
+            Animation bottomDown = AnimationUtils.loadAnimation(this,
+                    R.anim.bottom_down);
 
-	            pallete_backg.startAnimation(bottomDown);
-	            pallete_backg.setVisibility(View.GONE);
-	            colors_palette.setVisibility(View.GONE);
-	        }
-	    }
+            pallete_backg.startAnimation(bottomDown);
+            pallete_backg.setVisibility(View.GONE);
+            colors_palette.setVisibility(View.GONE);
+        }
+    }
 
-	    private boolean isPanelShown() {
-	        return pallete_backg.getVisibility() == View.VISIBLE;
-	    }
-///////////////////////////////////////////////////////////////
-	    public void slideUpDown(final View view) {
-	        if (!watPanelShown()) {
-	            // Show the panel
-	            Animation bottomUp = AnimationUtils.loadAnimation(this, R.anim.bottom_up);
+    private boolean isPanelShown() {
+        return pallete_backg.getVisibility() == View.VISIBLE;
+    }
 
-	            colors_palette.startAnimation(bottomUp);
-	            colors_palette.setVisibility(View.VISIBLE);
-	            pallete_backg.setVisibility(View.GONE);
-	        }
-	        else {
-	            // Hide the Panel
-	            Animation bottomDown = AnimationUtils.loadAnimation(this,
-	                    R.anim.bottom_down);
+    ///////////////////////////////////////////////////////////////
+    public void slideUpDown(final View view) {
+        if (!watPanelShown()) {
+            // Show the panel
+            Animation bottomUp = AnimationUtils.loadAnimation(this, R.anim.bottom_up);
 
-	            colors_palette.startAnimation(bottomDown);
-	            colors_palette.setVisibility(View.GONE);
-	            pallete_backg.setVisibility(View.GONE);
-	        }
-	    }
+            colors_palette.startAnimation(bottomUp);
+            colors_palette.setVisibility(View.VISIBLE);
+            pallete_backg.setVisibility(View.GONE);
+        } else {
+            // Hide the Panel
+            Animation bottomDown = AnimationUtils.loadAnimation(this,
+                    R.anim.bottom_down);
 
-	    private boolean watPanelShown() {
-	        return colors_palette.getVisibility() == View.VISIBLE;
-	    }
-	    
-		//send trackball event to drawing view
-		public boolean dispatchTrackballEvent(MotionEvent ev) {
-			drawView.requestFocus();
-			return drawView.onTrackballEvent(ev);
-		}
+            colors_palette.startAnimation(bottomDown);
+            colors_palette.setVisibility(View.GONE);
+            pallete_backg.setVisibility(View.GONE);
+        }
+    }
+
+    private boolean watPanelShown() {
+        return colors_palette.getVisibility() == View.VISIBLE;
+    }
+
+    //send trackball event to drawing view
+    public boolean dispatchTrackballEvent(MotionEvent ev) {
+        drawView.requestFocus();
+        return drawView.onTrackballEvent(ev);
+    }
 
 }
